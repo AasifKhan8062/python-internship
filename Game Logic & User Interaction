@@ -1,0 +1,67 @@
+# Game Logic & User Interaction
+
+# Initialize player inventory and progress
+inventory = []
+progress = 0
+
+def display_intro():
+    print("You wake up on a deserted island after a shipwreck.")
+    print("You see a dense jungle, a shoreline, and a mysterious cave.")
+    print("What do you want to do?")
+
+def display_options():
+    print("1. Explore the jungle")
+    print("2. Investigate the shoreline")
+    print("3. Enter the mysterious cave")
+    print("4. Check inventory")
+    print("5. Quit")
+
+def explore_jungle():
+    global progress
+    print("You venture into the jungle and find a hidden stash of supplies.")
+    inventory.append("Supplies")
+    progress += 1
+
+def investigate_shoreline():
+    global progress
+    print("You find a broken radio that might be fixable.")
+    inventory.append("Broken Radio")
+    progress += 1
+
+def enter_cave():
+    global progress
+    print("You discover a series of intricate tunnels and a hidden treasure.")
+    inventory.append("Treasure")
+    progress += 1
+
+def check_inventory():
+    print("Your inventory: ", inventory)
+
+# Main game loop
+while True:
+    display_intro()
+    display_options()
+
+    choice = input("Enter your choice (1-5): ")
+
+    if choice == '1':
+        explore_jungle()
+    elif choice == '2':
+        investigate_shoreline()
+    elif choice == '3':
+        enter_cave()
+    elif choice == '4':
+        check_inventory()
+    elif choice == '5':
+        print("Thanks for playing!")
+        break
+    else:
+        print("Invalid choice. Try again.")
+
+# Game logic to determine endings based on progress
+if "Treasure" in inventory and progress >= 3:
+    print("Congratulations! You found the treasure and fixed the radio. You are rescued!")
+elif "Supplies" in inventory and "Broken Radio" in inventory:
+    print("You managed to fix the radio but didn't find the treasure. You're rescued, but without treasure.")
+else:
+    print("Unfortunately, you weren't able to find a way off the island.")
